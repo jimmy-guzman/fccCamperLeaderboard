@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <header className="main-header">
-      <a href="/" className="title">
+      <a href="." className="title">
         <h1>freeCodeCamp</h1>
       </a>
       <svg
