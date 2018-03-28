@@ -3,18 +3,20 @@ import { fetchTopCampers } from "../utils/api";
 
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
+import Loading from "./Loading";
 
 class Leaderboard extends React.Component {
   state = {
+    selectedTimeframe: "alltime",
     campers: null
   };
 
   componentDidMount() {
-    this.updateCampers("alltime");
+    this.updateCampers(this.state.selectedTimeframe);
   }
 
   updateCampers = async time => {
-    this.setState(() => ({ campers: null }));
+    this.setState(() => ({ selectedTimeframe: time, campers: null }));
 
     const campers = await fetchTopCampers(time);
     this.setState(() => ({ campers }));
@@ -23,11 +25,17 @@ class Leaderboard extends React.Component {
   render() {
     return (
       <div className="leaderboard">
-        <h2> Leaderboard </h2>
+        {!this.state.campers ? <Loading /> : <h2> Leaderboard </h2>}
+
         <hr />
         <table>
-          <TableHeader />
-          <TableBody />
+          <TableHeader
+            selectedTimeframe={this.state.selectedTimeframe}
+            onSelect={this.updateCampers}
+          />
+          {!this.state.campers ? null : (
+            <TableBody campers={this.state.campers} />
+          )}
         </table>
       </div>
     );

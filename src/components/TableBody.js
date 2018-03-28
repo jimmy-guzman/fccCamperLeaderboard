@@ -1,22 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-const TableBody = () => {
-  return (
-    <tbody>
-      <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>50</td>
-        <td>150</td>
+const TableBody = ({ campers }) => (
+  <tbody>
+    {campers.map(({ username, img, alltime, recent }, index) => (
+      <tr key={username}>
+        <td className="number">{index + 1}</td>
+        <td className="user">
+          <a href={`https://www.freecodecamp.com/${username}`} target="_blank">
+            <img src={img} />
+            <span>{username}</span>
+          </a>
+        </td>
+        <td>{recent}</td>
+        <td>{alltime}</td>
       </tr>
-      <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>94</td>
-        <td>436</td>
-      </tr>
-    </tbody>
-  );
-};
+    ))}
+  </tbody>
+);
 
 export default TableBody;
