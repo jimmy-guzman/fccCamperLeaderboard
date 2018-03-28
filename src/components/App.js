@@ -1,11 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import Leaderboard from "./Leaderboard";
+import Header from "./Header";
+
 const App = () => {
   return (
-    <div>
-      <p>Testing!</p>
+    <div className="container">
+      <Header />
+      <Leaderboard />
     </div>
   );
 };
 export default App;
-ReactDOM.render(<App />, document.getElementById("app"));
